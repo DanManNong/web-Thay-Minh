@@ -25,81 +25,92 @@
         body { 
             font-family: 'Inter', sans-serif; background-color: var(--dr-bg); color: var(--dr-text); 
             background-image: radial-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px; line-height: 1.6; overflow-x: hidden;
+            background-size: 30px 30px; line-height: 1.6; overflow-x: hidden;
         }
 
+        /* Canh lề 10% trên Mobile, Desktop giữ độ rộng tối đa */
+        main { padding-left: 10%; padding-right: 10%; width: 100%; margin: 0 auto; }
+        @media (min-width: 1024px) { main { padding-left: 5%; padding-right: 5%; max-width: 1200px; } }
+
         .header-fixed { display: flex; justify-content: center; white-space: nowrap; font-size: clamp(8px, 2.3vw, 10px); letter-spacing: 0.6em; text-indent: 0.6em; width: 100%; font-weight: 500; color: #94A3B8; }
-        .name-fixed { white-space: nowrap; font-weight: 700; letter-spacing: 0.15em; font-size: clamp(1.5rem, 7vw, 3rem); color: var(--dr-text); }
+        .name-fixed { white-space: nowrap; font-weight: 700; letter-spacing: 0.15em; font-size: clamp(1.5rem, 7vw, 2.8rem); color: var(--dr-text); }
 
         .dr-btn { padding: 12px 32px; background-color: transparent; border: 1px solid var(--dr-border); color: var(--dr-accent); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; transition: 0.5s; display: inline-flex; align-items: center; justify-content: center; }
         .dr-btn:hover { background-color: rgba(59, 130, 246, 0.1); border-color: var(--dr-accent); transform: translateY(-3px); }
 
-        .pillar-grid { display: grid; grid-template-cols: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 1200px; }
+        .pillar-grid { display: grid; grid-template-cols: repeat(2, 1fr); gap: 1rem; width: 100%; }
         @media (min-width: 1024px) { .pillar-grid { grid-template-cols: repeat(5, 1fr); gap: 1.5rem; } }
         
-        .pillar-box { min-height: 180px; padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--dr-border); text-align: center; transition: 0.4s; }
-        .pillar-box:hover { border-color: var(--dr-gold); }
-
+        .pillar-box { min-height: 160px; padding: 1.2rem; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--dr-border); text-align: center; transition: 0.4s; }
+        
         .contact-box-style {
-            min-height: 120px; background: rgba(30, 41, 59, 0.4); border: 1px solid var(--dr-border);
+            min-height: 110px; background: rgba(30, 41, 59, 0.4); border: 1px solid var(--dr-border);
             display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s;
         }
-        .contact-box-style:hover { border-color: var(--dr-accent); transform: translateY(-5px); background: rgba(59, 130, 246, 0.05); }
+        .contact-box-style:hover { border-color: var(--dr-accent); transform: translateY(-5px); }
 
         .contact-grid-sync { display: grid; grid-template-cols: repeat(2, 1fr); gap: 12px; width: 100%; }
         @media (min-width: 1024px) { .contact-grid-sync { grid-template-cols: repeat(4, 1fr); gap: 15px; } }
 
+        /* Modal QR giống chú Phong */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(15px); z-index: 100; align-items: center; justify-content: center; }
+        .card-grid { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); gap: 10px; width: 100%; max-width: 450px; }
+        .card-item { background: rgba(30, 41, 59, 0.8); border: 1px solid var(--dr-border); display: flex; flex-direction: column; justify-content: center; align-items: center; aspect-ratio: 1/1; }
+        
         .stagger { opacity: 0; animation: fadeUp 1s forwards; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
+    <div id="qrCardModal" class="modal-overlay" onclick="closeQRModal(event)">
+        <div class="max-w-[500px] w-[90%] p-8 bg-[#1E293B] border border-blue-500/20 shadow-2xl relative" onclick="event.stopPropagation()">
+            <button onclick="document.getElementById('qrCardModal').style.display='none'" class="absolute top-4 right-4 text-slate-500 hover:text-white"><i class="fas fa-times"></i></button>
+            <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-8 text-center text-slate-400">Danh thiếp điện tử</h3>
+            <div class="card-grid mx-auto">
+                <div class="col-span-2 row-span-2 bg-white/5 border border-blue-500/20 p-2 flex items-center justify-center overflow-hidden">
+                    <img src="qr-minh.png" alt="QR" class="w-full h-full object-contain">
+                </div>
+                <a href="https://zalo.me/0904901111" target="_blank" class="card-item"><i class="fas fa-comment-dots text-blue-400"></i><span class="text-[6px] uppercase mt-1">Zalo</span></a>
+                <a href="https://facebook.com/minhngb" target="_blank" class="card-item"><i class="fab fa-facebook-f text-blue-400"></i><span class="text-[6px] uppercase mt-1">FB</span></a>
+                <a href="tel:0904901111" class="card-item"><i class="fas fa-phone-alt text-blue-400"></i><span class="text-[6px] uppercase mt-1">Call</span></a>
+                <a href="mailto:minhngb@gmail.com" class="card-item"><i class="fas fa-envelope text-blue-400"></i><span class="text-[6px] uppercase mt-1">Mail</span></a>
+                <a href="#" class="card-item opacity-20"><i class="fab fa-youtube text-blue-400"></i><span class="text-[6px] uppercase mt-1">YT</span></a>
+                <a href="https://www.linkedin.com/in/minhngb" target="_blank" class="card-item"><i class="fab fa-linkedin-in text-blue-400"></i><span class="text-[6px] uppercase mt-1">IN</span></a>
+            </div>
+        </div>
+    </div>
+
     <header class="p-12 md:p-16 flex justify-center stagger">
         <div class="header-fixed uppercase">CHIẾN LƯỢC - CÔNG NGHỆ - GIÁO DỤC</div>
     </header>
 
-    <main class="flex-grow flex flex-col items-center px-[5%]">
+    <main class="flex-grow flex flex-col items-center">
         <div class="mb-8 stagger" style="animation-delay: 0.2s">
-            <div class="w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-blue-500/20 mx-auto shadow-2xl shadow-blue-500/10">
+            <div class="w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-blue-500/20 mx-auto shadow-2xl">
                 <img src="ThayMinh.jpg" alt="Nguyễn Bình Minh" class="w-full h-full object-cover">
             </div>
         </div>
 
         <div class="text-center stagger" style="animation-delay: 0.4s">
             <h1 class="name-fixed uppercase mb-8">Nguyễn Bình Minh</h1>
-            <div class="w-20 h-[1.5px] bg-blue-500/50 mx-auto mb-10"></div>
+            <div class="w-20 h-[1px] bg-blue-500/50 mx-auto mb-10"></div>
+        </div>
+
+        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 w-full justify-center" style="animation-delay: 0.5s">
+            <button onclick="openQRModal()" class="dr-btn"><i class="fas fa-qrcode mr-3"></i>Danh thiếp điện tử</button>
+            <button onclick="alert('Đã tiếp nhận yêu cầu kết nối.')" class="dr-btn"><i class="fas fa-paper-plane mr-3"></i>Đăng ký tư vấn</button>
         </div>
 
         <div class="pillar-grid mb-16 stagger" style="animation-delay: 0.6s">
-            <div class="pillar-box">
-                <i class="fas fa-university text-xl mb-6 text-blue-400"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">VECOM</h3>
-                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Ủy viên Ban chấp hành<br>Hiệp hội Thương mại điện tử Việt Nam</p>
-            </div>
-            <div class="pillar-box">
-                <i class="fas fa-rocket text-xl mb-6 text-blue-400"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Digital Strategy</h3>
-                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Chuyên gia tư vấn chiến lược<br>Chuyển đổi số Doanh nghiệp</p>
-            </div>
-            <div class="pillar-box">
-                <i class="fas fa-chalkboard-user text-xl mb-6 text-blue-400"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Đào tạo</h3>
-                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Giảng viên & Diễn giả<br>Thương mại điện tử hiện đại</p>
-            </div>
-            <div class="pillar-box">
-                <i class="fas fa-lightbulb text-xl mb-6 text-blue-400"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Cố vấn</h3>
-                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Mentor khởi nghiệp<br>Công nghệ & Marketing số</p>
-            </div>
-            <div class="pillar-box">
-                <i class="fas fa-globe text-xl mb-6 text-blue-400"></i>
-                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Kinh tế số</h3>
-                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Phát triển hệ sinh thái<br>Kinh doanh trực tuyến</p>
-            </div>
+            <div class="pillar-box"><i class="fas fa-university text-xl mb-6 text-blue-400"></i><h3 class="text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">VECOM</h3><p class="text-[8px] text-slate-400 uppercase leading-relaxed">Ủy viên Ban chấp hành<br>Hiệp hội TMĐT Việt Nam</p></div>
+            <div class="pillar-box"><i class="fas fa-rocket text-xl mb-6 text-blue-400"></i><h3 class="text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Chiến lược số</h3><p class="text-[8px] text-slate-400 uppercase leading-relaxed">Tư vấn chiến lược<br>Chuyển đổi số Doanh nghiệp</p></div>
+            <div class="pillar-box"><i class="fas fa-chalkboard-user text-xl mb-6 text-blue-400"></i><h3 class="text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Đào tạo</h3><p class="text-[8px] text-slate-400 uppercase leading-relaxed">Giảng viên & Diễn giả<br>Thương mại điện tử</p></div>
+            <div class="pillar-box"><i class="fas fa-lightbulb text-xl mb-6 text-blue-400"></i><h3 class="text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Mentor</h3><p class="text-[8px] text-slate-400 uppercase leading-relaxed">Cố vấn khởi nghiệp<br>Công nghệ số</p></div>
+            <div class="pillar-box"><i class="fas fa-globe text-xl mb-6 text-blue-400"></i><h3 class="text-[10px] font-bold tracking-[0.2em] mb-4 uppercase">Kinh tế số</h3><p class="text-[8px] text-slate-400 uppercase leading-relaxed">Phát triển hệ sinh thái<br>Kinh doanh trực tuyến</p></div>
         </div>
 
-        <div class="w-full max-w-4xl border-t border-blue-500/20 pt-16 mb-20 stagger" style="animation-delay: 0.8s">
+        <div class="w-full border-t border-blue-500/20 pt-16 mb-20 stagger" style="animation-delay: 0.8s">
             <div class="contact-grid-sync">
                 <a href="tel:0904901111" class="contact-box-style">
                     <i class="fas fa-phone-alt text-lg text-blue-400 mb-4"></i>
@@ -107,7 +118,7 @@
                 </a>
                 <a href="mailto:minhngb@gmail.com" class="contact-box-style">
                     <i class="fas fa-envelope text-lg text-blue-400 mb-4"></i>
-                    <span class="text-[10px] lowercase tracking-normal">minhngb@gmail.com</span>
+                    <span class="text-[9px] lowercase">minhngb@gmail.com</span>
                 </a>
                 <a href="https://facebook.com/minhngb" target="_blank" class="contact-box-style">
                     <i class="fab fa-facebook-f text-lg text-blue-400 mb-4"></i>
@@ -122,9 +133,15 @@
     </main>
 
     <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1s">
-        <div class="footer-fixed uppercase mb-4 opacity-50">NGUYỄN BÌNH MINH - ĐỐI TÁC CHIẾN LƯỢC CỦA NGUYỄN TẤN PHONG</div>
-        <div class="text-[8px] tracking-[0.4em] text-slate-500 uppercase">© 2026 DESIGNED FOR EXCELLENCE.</div>
+        <div class="text-[10px] tracking-[0.2em] text-slate-400 mb-4 text-center">
+            Nguyễn Bình Minh - Đối tác chiến lược của Nguyễn Tấn Phong
+        </div>
+        <div class="text-[8px] tracking-[0.4em] text-slate-500 uppercase opacity-30">© 2026 ALL RIGHTS RESERVED.</div>
     </footer>
 
+    <script>
+        function openQRModal() { document.getElementById('qrCardModal').style.display = 'flex'; }
+        function closeQRModal(e) { if(e.target.id === 'qrCardModal') { document.getElementById('qrCardModal').style.display = 'none'; } }
+    </script>
 </body>
 </html>
