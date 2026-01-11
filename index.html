@@ -1,1 +1,154 @@
-.
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PGS. TS. Nguyễn Bình Minh | CHIẾN LƯỢC - CÔNG NGHỆ - GIÁO DỤC</title>
+    
+    <meta name="description" content="PGS. TS. Nguyễn Bình Minh - Chuyên gia TMĐT, Chuyển đổi số, Ủy viên BCH VECOM.">
+    <meta property="og:title" content="PGS. TS. Nguyễn Bình Minh | CHIẾN LƯỢC • CÔNG NGHỆ • GIÁO DỤC">
+    <meta property="og:image" content="avatar-nguyenbinhminh.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dr-bg: #0F172A; /* Xanh Navy đậm - màu của sự tin cậy & học thuật */
+            --dr-accent: #3B82F6; /* Xanh Blue sáng - màu công nghệ */
+            --dr-gold: #F59E0B; /* Vàng hổ phách - màu của tri thức đỉnh cao */
+            --dr-text: #F8FAFC;
+            --dr-border: rgba(59, 130, 246, 0.2);
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; background-color: var(--dr-bg); color: var(--dr-text); 
+            background-image: radial-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px; line-height: 1.6; overflow-x: hidden;
+        }
+
+        .header-fixed { display: flex; justify-content: center; white-space: nowrap; font-size: clamp(8px, 2.3vw, 10px); letter-spacing: 0.6em; text-indent: 0.6em; width: 100%; font-weight: 500; color: #94A3B8; }
+        .name-fixed { white-space: nowrap; font-weight: 700; letter-spacing: 0.1em; font-size: clamp(1.2rem, 6vw, 2.8rem); color: var(--dr-text); }
+        .academic-title { color: var(--dr-gold); font-size: clamp(0.8rem, 3vw, 1.2rem); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 300; margin-bottom: 0.5rem; }
+
+        .dr-btn { padding: 12px 32px; background-color: transparent; border: 1px solid var(--dr-border); color: var(--dr-accent); font-size: 9px; text-transform: uppercase; letter-spacing: 0.3em; transition: 0.5s; display: inline-flex; align-items: center; justify-content: center; }
+        .dr-btn:hover { background-color: rgba(59, 130, 246, 0.1); border-color: var(--dr-accent); transform: translateY(-3px); }
+
+        .pillar-grid { display: grid; grid-template-cols: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 1200px; }
+        @media (min-width: 1024px) { .pillar-grid { grid-template-cols: repeat(5, 1fr); gap: 1.5rem; } }
+        
+        .pillar-box { min-height: 180px; padding: 1.5rem; background: rgba(30, 41, 59, 0.5); border: 1px solid var(--dr-border); text-align: center; transition: 0.4s; }
+        .pillar-box:hover { border-color: var(--dr-gold); transform: scale(1.02); }
+
+        .lecture-box {
+            min-height: 100px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--dr-border);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s;
+        }
+        .lecture-box:hover { border-color: var(--dr-accent); background: rgba(59, 130, 246, 0.05); }
+
+        .signature-img { width: 12rem; filter: brightness(0) invert(1); opacity: 0.9; margin-bottom: 1.5rem; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(15px); z-index: 100; align-items: center; justify-content: center; }
+        
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .stagger { opacity: 0; animation: fadeUp 1s forwards; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <div id="passwordModal" class="modal-overlay">
+        <div class="max-w-md w-full text-center p-12 bg-[#1E293B] border border-blue-500/20 shadow-2xl">
+            <h3 id="modalTitle" class="text-[10px] uppercase tracking-[0.3em] font-light mb-10 text-slate-400">Xác thực Đối tác</h3>
+            <input type="password" id="passInput" placeholder="Nhập mã định danh..." class="w-full p-4 bg-white/5 border border-white/10 text-white text-center mb-10 focus:outline-none focus:border-blue-500">
+            <div class="flex gap-6 justify-center">
+                <button onclick="closeModal('passwordModal')" class="text-[9px] uppercase tracking-widest opacity-50">Hủy</button>
+                <button onclick="validateAccess()" class="px-10 py-4 bg-blue-600/20 text-blue-400 text-[9px] uppercase tracking-widest border border-blue-500/30">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="p-12 md:p-16 flex justify-center stagger">
+        <div class="header-fixed uppercase">CHIẾN LƯỢC - CÔNG NGHỆ - GIÁO DỤC</div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center px-[5%] md:px-0">
+        <div class="mb-8 stagger" style="animation-delay: 0.2s">
+            <div class="w-44 h-44 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-blue-500/20 mx-auto shadow-2xl">
+                <img src="avatar-nguyenbinhminh.jpg" alt="PGS. TS. Nguyễn Bình Minh" class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <div class="text-center stagger" style="animation-delay: 0.4s">
+            <h2 class="academic-title">PGS. TS.</h2>
+            <h1 class="name-fixed uppercase mb-8">Nguyễn Bình Minh</h1>
+            <div class="w-16 h-[1px] bg-blue-500/50 mx-auto mb-10"></div>
+        </div>
+
+        <div class="mb-16 stagger flex flex-col md:flex-row gap-4 w-full max-w-2xl" style="animation-delay: 0.5s">
+            <button onclick="alert('Tính năng Danh thiếp đang cập nhật')" class="dr-btn flex-1"><i class="fas fa-qrcode mr-3"></i>Danh thiếp điện tử</button>
+            <button onclick="alert('Liên hệ tư vấn chiến lược')" class="dr-btn flex-1"><i class="fas fa-paper-plane mr-3"></i>Đăng ký tư vấn</button>
+            <a href="#" class="dr-btn flex-1"><i class="fas fa-graduation-cap mr-3"></i>Hồ sơ khoa học</a>
+        </div>
+
+        <div class="pillar-grid mb-24 stagger" style="animation-delay: 0.6s">
+            <div class="pillar-box">
+                <i class="fas fa-university text-xl mb-6 text-blue-400"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">VECOM</h3>
+                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Ủy viên Ban chấp hành<br>Hiệp hội Thương mại điện tử<br>Việt Nam</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-chalkboard-teacher text-xl mb-6 text-blue-400"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">ĐH Thương Mại</h3>
+                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Giảng viên Cao cấp<br>Chuyên gia đào tạo<br>Thương mại điện tử</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-microchip text-xl mb-6 text-blue-400"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Digital Strategy</h3>
+                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Tư vấn chiến lược<br>Chuyển đổi số<br>Doanh nghiệp</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-book text-xl mb-6 text-blue-400"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Tác giả</h3>
+                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Sách & Công trình<br>Nghiên cứu khoa học<br>Kinh tế số</p>
+            </div>
+            <div class="pillar-box">
+                <i class="fas fa-users text-xl mb-6 text-blue-400"></i>
+                <h3 class="text-[11px] font-bold tracking-[0.2em] mb-4 uppercase">Cố vấn</h3>
+                <p class="text-[8.5px] text-slate-400 uppercase leading-relaxed">Mentor khởi nghiệp<br>Công nghệ &<br>Marketing số</p>
+            </div>
+        </div>
+
+        <div class="w-full max-w-6xl mb-32 text-center stagger" style="animation-delay: 0.8s">
+            <h2 class="text-[10px] font-medium tracking-[0.4em] mb-12 uppercase opacity-40">Hệ sinh thái tri thức</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <button onclick="openGate('Bài giảng Chuyển đổi số', '2025', '#')" class="lecture-box"><h4 class="text-[9px] font-bold uppercase">Chuyển đổi số 4.0</h4></button>
+                <button onclick="openGate('Digital Marketing', '2025', '#')" class="lecture-box"><h4 class="text-[9px] font-bold uppercase">Digital Marketing</h4></button>
+                <button onclick="openGate('TMĐT bền vững', '2025', '#')" class="lecture-box"><h4 class="text-[9px] font-bold uppercase">TMĐT Bền vững</h4></button>
+                <button onclick="openGate('Kinh tế số', '2025', '#')" class="lecture-box"><h4 class="text-[9px] font-bold uppercase">Kinh tế số</h4></button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-16 flex flex-col items-center stagger" style="animation-delay: 1s">
+        <div class="footer-fixed uppercase mb-4 opacity-50">PGS. TS. NGUYỄN BÌNH MINH - ĐỐI TÁC CHIẾN LƯỢC CỦA NGUYỄN TẤN PHONG</div>
+        <div class="text-[8px] tracking-[0.4em] text-slate-500 uppercase">© 2026 ALL RIGHTS RESERVED.</div>
+    </footer>
+
+    <script>
+        let currentTarget = ""; let currentCode = "";
+        function openGate(name, code, url) { 
+            document.getElementById('modalTitle').innerText = "Tài liệu chuyên gia: " + name; 
+            document.getElementById('passwordModal').style.display = 'flex'; 
+            currentTarget = url; currentCode = code; 
+        }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function validateAccess() {
+            if (document.getElementById('passInput').value === currentCode) {
+                window.location.href = currentTarget;
+            } else {
+                alert("Mã định danh không chính xác.");
+            }
+        }
+    </script>
+</body>
+</html>.
