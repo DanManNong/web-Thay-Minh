@@ -28,7 +28,7 @@
             background-size: 30px 30px; line-height: 1.6; overflow-x: hidden;
         }
 
-        /* Canh lề 10% trên Mobile, Desktop giữ độ rộng tối đa */
+        /* Canh lề 10% trên Mobile */
         main { padding-left: 10%; padding-right: 10%; width: 100%; margin: 0 auto; }
         @media (min-width: 1024px) { main { padding-left: 5%; padding-right: 5%; max-width: 1200px; } }
 
@@ -52,7 +52,7 @@
         .contact-grid-sync { display: grid; grid-template-cols: repeat(2, 1fr); gap: 12px; width: 100%; }
         @media (min-width: 1024px) { .contact-grid-sync { grid-template-cols: repeat(4, 1fr); gap: 15px; } }
 
-        /* Modal QR giống chú Phong */
+        /* Modal QR */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(15px); z-index: 100; align-items: center; justify-content: center; }
         .card-grid { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); gap: 10px; width: 100%; max-width: 450px; }
         .card-item { background: rgba(30, 41, 59, 0.8); border: 1px solid var(--dr-border); display: flex; flex-direction: column; justify-content: center; align-items: center; aspect-ratio: 1/1; }
@@ -69,7 +69,7 @@
             <h3 class="text-[10px] uppercase tracking-[0.3em] font-light mb-8 text-center text-slate-400">Danh thiếp điện tử</h3>
             <div class="card-grid mx-auto">
                 <div class="col-span-2 row-span-2 bg-white/5 border border-blue-500/20 p-2 flex items-center justify-center overflow-hidden">
-                    <img src="qr-minh.png" alt="QR" class="w-full h-full object-contain">
+                    <img src="QRcodeThayMinh.jpg" alt="QR Code" class="w-full h-full object-contain">
                 </div>
                 <a href="https://zalo.me/0904901111" target="_blank" class="card-item"><i class="fas fa-comment-dots text-blue-400"></i><span class="text-[6px] uppercase mt-1">Zalo</span></a>
                 <a href="https://facebook.com/minhngb" target="_blank" class="card-item"><i class="fab fa-facebook-f text-blue-400"></i><span class="text-[6px] uppercase mt-1">FB</span></a>
